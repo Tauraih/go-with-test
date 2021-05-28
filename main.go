@@ -1,9 +1,9 @@
-package main 
+package main
 
-import ( 
+import (
+	"errors"
 	"fmt"
 	"math"
-	"errors"
 )
 
 const enHello = "Hello, "
@@ -136,3 +136,16 @@ func (w *Wallet) Withdraw(amount Bitcoin) error {
     w.balance -= amount
     return nil
 }
+
+type Dictionary map[string]string
+var ErrNotFound = errors.New("could not find the word you were looking for")
+
+func (d Dictionary) Search(word string) (string , error) {
+	definition, ok := d[word]
+	if !ok {
+		return " ", ErrNotFound
+	}
+	return definition, nil
+}
+
+func (d Dictionary) Add(word, definition string) {}
