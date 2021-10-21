@@ -147,5 +147,6 @@ func (d Dictionary) Search(word string) (string , error) {
 	}
 	return definition, nil
 }
+// yX9QPs&ngblMr
 
 func (d Dictionary) Add(word, definition string) {}
