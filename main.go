@@ -5,12 +5,19 @@ import (
 	"fmt"
 	"math"
 	"io"
+	"time"
+	"os"
 )
 
 const enHello = "Hello, "
 const spanishHelloPrefix = "Hola, "
 const frenchHelloPrefix = "Home, "
 const reapCount = 5
+const countdownStart = 4
+const finalWord = `3
+2
+1
+Go!`
 
 type Rectangle struct {
 	Width float64 
@@ -42,6 +49,9 @@ func main(){
 
 	b := [...]string{"Penn", "Teller", "Bank", "Teller", "Penn"}
 	fmt.Println(b)
+
+	sleeper := &DefaultSleeper{}
+	Countdown(os.Stdout, sleeper)
 }
 
 
@@ -162,4 +172,24 @@ type Sleeper interface {
 	Sleep()
 }
 
+type SpySleeper struct {
+	Calls int
+}
 
+func (s *SpySleeper) Sleep() {
+	s.Calls++
+}
+
+type DefaultSleeper struct {}
+
+func (d *DefaultSleeper) Sleep() {
+	time.Sleep(1 * time.Second)
+}
+
+func Countdown(out io.Writer, sleeper Sleeper) {
+	for i := countdownStart; i > 0; i-- {
+		sleeper.Sleep()
+		fmt.Fprintln(out, i)
+	}
+	fmt.Fprint(out, finalWord)
+}
