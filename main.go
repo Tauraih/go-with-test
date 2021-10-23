@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"io"
 )
 
 const enHello = "Hello, "
@@ -150,3 +151,15 @@ func (d Dictionary) Search(word string) (string , error) {
 // yX9QPs&ngblMr
 
 func (d Dictionary) Add(word, definition string) {}
+
+// dependency injection
+func Greet(writer io.Writer, name string) {
+	fmt.Fprintf(writer, "Hello, %s", name)
+}
+
+// mocking
+type Sleeper interface {
+	Sleep()
+}
+
+
