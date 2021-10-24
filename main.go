@@ -3,10 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
-	"math"
 	"io"
-	"time"
+	"math"
 	"os"
+	"time"
 )
 
 const enHello = "Hello, "
@@ -20,30 +20,30 @@ const finalWord = `3
 Go!`
 
 type Rectangle struct {
-	Width float64 
+	Width  float64
 	Height float64
 }
 
 type Circle struct {
-    Radius float64
+	Radius float64
 }
 
 type Triangle struct {
-    Base   float64
-    Height float64
+	Base   float64
+	Height float64
 }
 
-type Shape interface{
+type Shape interface {
 	Area() float64
 }
 
-type Bitcoin int 
+type Bitcoin int
 
-type Wallet struct{
+type Wallet struct {
 	balance Bitcoin
 }
 
-func main(){
+func main() {
 	fmt.Println(Hello("Tau", "spanish"))
 	fmt.Println(Add(10, 10))
 
@@ -54,16 +54,14 @@ func main(){
 	Countdown(os.Stdout, sleeper)
 }
 
-
-func Hello(name string, language string) string{
-	if name == ""{
+func Hello(name string, language string) string {
+	if name == "" {
 		name = "World"
 	}
 	return prefixlanguage(language) + name
 }
 
-
-func prefixlanguage(language string) (prefix string){
+func prefixlanguage(language string) (prefix string) {
 
 	switch language {
 	case "french":
@@ -77,7 +75,6 @@ func prefixlanguage(language string) (prefix string){
 	return
 }
 
-
 func Add(x, y int) int {
 	// output: add X + y
 	return x + y
@@ -86,14 +83,14 @@ func Add(x, y int) int {
 // iteration
 func Repeat(ch string) string {
 	var reap string
-	for i := 0; i < reapCount; i++{
+	for i := 0; i < reapCount; i++ {
 		reap = reap + ch
 	}
 	return reap
 }
 
 // arrays & slices
-func Sum(nums []int) int{
+func Sum(nums []int) int {
 	sum := 0
 	for _, i := range nums {
 		sum += i
@@ -102,12 +99,12 @@ func Sum(nums []int) int{
 }
 
 func SumAll(numbersToSum ...[]int) []int {
-    var sums []int
-    for _, numbers := range numbersToSum {
-        sums = append(sums, Sum(numbers))
-    }
+	var sums []int
+	for _, numbers := range numbersToSum {
+		sums = append(sums, Sum(numbers))
+	}
 
-    return sums
+	return sums
 }
 
 // structs, methods & interfaces
@@ -120,13 +117,12 @@ func (r Rectangle) Area() float64 {
 }
 
 func (c Circle) Area() float64 {
-    return math.Pi * c.Radius * c.Radius
+	return math.Pi * c.Radius * c.Radius
 }
 
 func (t Triangle) Area() float64 {
-    return (t.Base * t.Height) * 0.5
+	return (t.Base * t.Height) * 0.5
 }
-
 
 // pointers
 func (w *Wallet) Deposit(amount Bitcoin) {
@@ -140,24 +136,26 @@ func (w *Wallet) Balance() Bitcoin {
 
 func (w *Wallet) Withdraw(amount Bitcoin) error {
 
-    if amount > w.balance {
-        return errors.New("oh no")
-    }
+	if amount > w.balance {
+		return errors.New("oh no")
+	}
 
-    w.balance -= amount
-    return nil
+	w.balance -= amount
+	return nil
 }
 
 type Dictionary map[string]string
+
 var ErrNotFound = errors.New("could not find the word you were looking for")
 
-func (d Dictionary) Search(word string) (string , error) {
+func (d Dictionary) Search(word string) (string, error) {
 	definition, ok := d[word]
 	if !ok {
 		return " ", ErrNotFound
 	}
 	return definition, nil
 }
+
 // yX9QPs&ngblMr
 
 func (d Dictionary) Add(word, definition string) {}
@@ -180,7 +178,7 @@ func (s *SpySleeper) Sleep() {
 	s.Calls++
 }
 
-type DefaultSleeper struct {}
+type DefaultSleeper struct{}
 
 func (d *DefaultSleeper) Sleep() {
 	time.Sleep(1 * time.Second)

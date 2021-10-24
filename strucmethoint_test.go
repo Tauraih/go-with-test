@@ -1,20 +1,20 @@
 package main
 
-import ( 
+import (
 	"testing"
 )
 
-func TestPerimeter(t *testing.T){
+func TestPerimeter(t *testing.T) {
 	rectangle := Rectangle{12.0, 6.0}
 	got := Perimeter(rectangle)
 	want := 36.0
-	
-	if got != want{
+
+	if got != want {
 		t.Errorf("got %.2f want %.2f", got, want)
 	}
 }
 
-func TestArea(t *testing.T){
+func TestArea(t *testing.T) {
 	// checkArea := func(t testing.TB, shape Shape, want float64){
 	// 	t.Helper()
 	// 	got := shape.Area()
@@ -37,9 +37,9 @@ func TestArea(t *testing.T){
 	// 	// }
 	// 	checkArea(t, circle, 314.1592653589793)
 	// })
-	areaTests := []struct{
+	areaTests := []struct {
 		shape Shape
-		want float64
+		want  float64
 	}{
 		{Rectangle{Width: 12, Height: 6}, 72.0},
 		{Circle{Radius: 10}, 314.1592653589793},
